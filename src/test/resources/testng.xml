@@ -1,9 +1,21 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="example suite 1" verbose="1" >
-    <test name="Regression suite 1" >
+    <test name="Regression_1" >
         <parameter name="browser" value="firefox"/>
+        <parameter name="environment" value="SIT"/>
         <classes>
-            <class name="tests.googleTest">
+            <class name="com.sdg.tests.googleTest">
+                <methods>
+                    <include name="method1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Regression suite 2" >
+        <parameter name="browser" value="firefox"/>
+        <parameter name="environment" value="UAT"/>
+        <classes>
+            <class name="com.sdg.tests.googleTest">
                 <methods>
                     <include name="method1"/>
                 </methods>
