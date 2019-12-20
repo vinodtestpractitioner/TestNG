@@ -1,8 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="example suite 1" verbose="1" >
     <test name="Regression suite 1" >
+        <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="testngAnnotations"/>
+            <class name="tests.googleTest">
+                <methods>
+                    <include name="method1"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
