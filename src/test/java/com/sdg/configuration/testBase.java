@@ -1,18 +1,22 @@
 package com.sdg.configuration;
 
+import com.sdg.datasetup.testDataSetup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class testBase extends testEnvironment{
     public static WebDriver driver;
+    public static String testMethodName;
+    public static String descriptiveTestName;
+    public static HashMap<String, String> testdata;
     @BeforeTest
     @Parameters({"browser","environment"})
     public void browserSetup(String browser, String environment) throws Exception {
@@ -46,5 +50,11 @@ public class testBase extends testEnvironment{
                 else{
                     Assert.assertNull(driver,"Previous test driver is not closed!");
                 }
+    }
+    @BeforeMethod
+    public void setup(Method method) {
+        testMethodName = method.getName(); //This will be:verifySaveButtonEnabled
+        descriptiveTestName = method.getAnnotation(Test.class).testName(); //This will be: 'Verify if the save button is enabled'
+        testdata= testDataSetup.retrieveTestData(testBase.testMethodName);
     }
 }
